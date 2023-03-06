@@ -1,0 +1,13 @@
+@import '../../styles/settings.scss';
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  span {
+    margin: 0 10px;
+  }
+}
