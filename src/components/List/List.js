@@ -69,7 +69,7 @@ const List = () => {
       <p className={styles.description}>Interesting things I want to check out</p>
 
       <section className={styles.columns}>
-        {columns.map(column => <Column id={column.id} title={column.title} icon={column.icon} cards={column.cards} action={addCard} />)}    {/* action: przekazujemy referencję addCard z List do Column */}
+        {columns.map(column => <Column key={column.id} id={column.id} title={column.title} icon={column.icon} cards={column.cards} action={addCard} />)}    {/* action: przekazujemy referencję addCard z List do Column */}
       </section>
 
       <ColumnForm action={addColumn} />
