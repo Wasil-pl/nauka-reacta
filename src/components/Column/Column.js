@@ -4,10 +4,11 @@ import CardForm from '../CardForm/CardForm';
 import { useSelector } from 'react-redux';
 
 const Column = props => {
+  const searchInput = useSelector((state) => state.searchInput);
 
   /* props.id to parametr id z identyfikatorem kolumny. Staramy się wziąć więc ze state.cards (wszystkich kart)
   tylko te karty, których właściwość columnId jest zgodna właśnie z daną kolumną */
-  const cards = useSelector(state => state.cards.filter(card => card.columnId === props.id));
+  const cards = useSelector(state => state.cards.filter(card => card.columnId === props.id && card.title.toLowerCase().includes(searchInput.toLowerCase())));
 
   return (
     <article className={styles.column}>

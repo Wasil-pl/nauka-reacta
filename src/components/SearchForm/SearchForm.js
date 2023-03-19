@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '../Button/Button';
 import TextInput from '../TextInput/TextInput';
 import styles from './SearchForm.module.scss';
@@ -15,9 +17,20 @@ tylko przekaże taką wartość do funkcji pod nazwą parametru children.
 Trzeba jeszcze tylko zmodyfikować odpowiednio js*/
 
 const SearchForm = () => {
+
+  const dispatch = useDispatch();
+
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch({ type: 'UPDATE_SEARCHINPUT', payload: searchInput });
+    setSearchInput('');
+  }
+
   return (
-    <form className={styles.searchForm}>
-      <TextInput placeholder="Search..." />
+    <form className={styles.searchForm} onSubmit={handleSubmit}>
+      <TextInput placeholder="Search..." type="text" value={searchInput} onChange={e => setSearchInput(e.target.value)} />
       <Button>
         <span className="fa fa-search" />
       </Button>
