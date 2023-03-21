@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import TextInput from '../TextInput/TextInput';
 import { useDispatch } from 'react-redux';
+import { addColumn } from '../../redux/store';
 
   /* onSubmit to tylko skrót od nasłuchwiacza na event Submit,
    a funkcja strzałkowa to tutaj tylko prostsza alternatywa od klasycznej funkcji.
@@ -25,7 +26,7 @@ const ColumnForm = () => {
 
   const handleSubmit = e => {             /*  3  */
     e.preventDefault();
-    dispatch({ type: 'ADD_COLUMN', payload: { title, icon } });       /*  4 uruchom funkcję useDispatch której przekazujemy odpowiednie argumenty. W tym wypadku ma uruchomić akcję addColumn, przy czym nowa kolumna powinna być obiektem z właściwością title o wartości stałej title i icon o wartości stałej icon */
+    dispatch(addColumn({ title, icon }));       /*  4 uruchom funkcję useDispatch której przekazujemy odpowiednie argumenty. W tym wypadku ma uruchomić akcję addColumn, przy czym nowa kolumna powinna być obiektem z właściwością title o wartości stałej title i icon o wartości stałej icon */
     setTitle('');                                     /*  5  zeruje input */
     setIcon('');
   }

@@ -2,6 +2,7 @@ import Column from '../Column/Column';
 import styles from './List.module.scss';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import { useSelector } from 'react-redux';
+import { getAllColumns } from '../../redux/store';
 
 const List = () => {
 
@@ -11,7 +12,7 @@ const List = () => {
   W funkcji tej otrzymujemy dostęp do całego stanu i decydujemy co z tego stanu chcemy zwrócić.
   To co tam zwrócimy jest potem zwracane również przez samą useSelector.
   Dzięki temu możemy referencję do takich danych przypisać np. do stałej, tak jak to zrobiliśmy u nas. */
-  const columns = useSelector(state => state.columns);
+  const columns = useSelector(getAllColumns);
 
   return (
     <div className={styles.list}>

@@ -1,22 +1,23 @@
 import { createStore   } from 'redux';   // za stworzenie magazynu odpowiada funkcja 'crateStore
 import shortid from 'shortid';
+import { strContains } from '../utils/strContains';
 import initialState from './initialState';
 
-/* W pierwszym argumencie przekazujemy referencję do funkcji, która będzie odpowiadała za modyfikację danych z magazynu.
-W Reduksie za całą obsługę danych, a więc dodawanie, modyfikacja, usuwanie itd., będzie odpowiadać jedna duża funkcja
-Drugi argument przyjmuje z kolei informacje o danych startowych magazynu, czyli jakie dane magazyn powinien posiadać na początku, a więc zawartość stanu będzie ulegała zmianie.
-My wstawiliśmy tutaj na razie pustą tablicę columns, ale taki obiekt stanu w centrali może zawierać dowolną ilość elementów o dowolnych typach.
-Podsumowując, tym krótkim kodem mówimy JS-owi: stwórz nowy magazyn, który jako dane startowe przyjmie obiekt z tablicą columns i daj mu dostęp do naszej funkcji reducer.
-action to obiekt z właściwością type o wartości ADD_COLUMN
-jeśli obiekt action ma właściwość type o wartości ADD_COLUMN, to my chcemy zwrócić jako nowy stan, obiekt, który ma zawartość starego stanu,
-ale z jedną zmianą… columns ma być powiększone o nowy obiekt, który otrzymamy z właściwości newColumn obiektu action 
-Jeśli jednak action.type będzie inne, no to zwrócimy state bez zmian.
+//selectors
+/*  Funkcje, które mają pomagać nam w przygotowywaniu danych z centrali, będziemy nazywać selektorami
+(z ang. select = wybierać). Wynika to oczywiście z roli jaką pełnią funkcję,
+którą jest wybranie odpowiednich danych. */
+export const getFilteredCards = ({ cards, searchInput }, columnId) => cards
+  .filter(card => card.columnId === columnId && strContains(card.title, searchInput));  /* id to parametr id z identyfikatorem kolumny. Staramy się wziąć więc ze state.cards (wszystkich kart) tylko te karty, których właściwość columnId jest zgodna właśnie z daną kolumną */
 
-  const reducer = (state, action) => {
-    if(action.type === 'ADD_COLUMN') return { ...state, columns: [...state.columns, action.newColumn]} // 'ADD_COLUMN' - Przyjęło się, że nazwy akcji powinny być pisane z dużych liter, a zamiast spacji należy używać “podłogi”.
-    return state;
-  };
-*/
+export const getAllColumns = ( state ) => state.columns;
+
+// action creators
+export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
+
+export const addCard = payload => ({ type: 'ADD_CARD', payload });
+
+export const search = payload => ({ type: 'UPDATE_SEARCHINPUT', payload });
 
 const reducer = (state, action) => {
   switch(action.type) {
