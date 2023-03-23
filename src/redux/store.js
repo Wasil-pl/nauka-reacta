@@ -17,7 +17,7 @@ export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
 
 export const addCard = payload => ({ type: 'ADD_CARD', payload });
 
-export const search = payload => ({ type: 'UPDATE_SEARCHINPUT', payload });
+export const updateSearchInput = payload => ({ type: 'UPDATE_SEARCHINPUT', payload });
 
 const reducer = (state, action) => {
   switch(action.type) {
