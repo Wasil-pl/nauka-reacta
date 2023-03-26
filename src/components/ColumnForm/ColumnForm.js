@@ -14,7 +14,7 @@ import { addColumn } from '../../redux/store';
       });
   */
 
-const ColumnForm = () => {
+const ColumnForm = ({ listId }) => {
 
   /* 6 funkcja useDispatch tp pośrednik, odpowiada za uruchomienie funkcji reducer i to w taki sposób,
   by przekazać jej aktualny stan i nasz obiekt akcji. Dodatkowo dba o to by to co zwróci,
@@ -26,7 +26,7 @@ const ColumnForm = () => {
 
   const handleSubmit = e => {             /*  3  */
     e.preventDefault();
-    dispatch(addColumn({ title, icon }));       /*  4 uruchom funkcję useDispatch której przekazujemy odpowiednie argumenty. W tym wypadku ma uruchomić akcję addColumn, przy czym nowa kolumna powinna być obiektem z właściwością title o wartości stałej title i icon o wartości stałej icon */
+    dispatch(addColumn({ title, icon, listId }));       /*  4 uruchom funkcję useDispatch której przekazujemy odpowiednie argumenty. W tym wypadku ma uruchomić akcję addColumn, przy czym nowa kolumna powinna być obiektem z właściwością title o wartości stałej title i icon o wartości stałej icon */
     setTitle('');                                     /*  5  zeruje input */
     setIcon('');
   }

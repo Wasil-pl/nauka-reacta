@@ -2,7 +2,8 @@ import Column from '../Column/Column';
 import styles from './List.module.scss';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import { useSelector } from 'react-redux';
-import { getAllColumns } from '../../redux/store';
+import { getColumnsByList, getListById } from '../../redux/store';
+import { useParams } from 'react-router-dom';
 
 const List = () => {
 
@@ -12,14 +13,17 @@ const List = () => {
   W funkcji tej otrzymujemy dostęp do całego stanu i decydujemy co z tego stanu chcemy zwrócić.
   To co tam zwrócimy jest potem zwracane również przez samą useSelector.
   Dzięki temu możemy referencję do takich danych przypisać np. do stałej, tak jak to zrobiliśmy u nas. */
-  const columns = useSelector(getAllColumns);
+
+  const { listId } = useParams();  // useParams powie nam, jakie są wartości parametrów linku np list/2, to useParams zwróci nam obiekt { listId: 2 }
+  const columns = useSelector(state => getColumnsByList(state, listId));
+  const listData = useSelector(state => getListById(state, listId));  // argument 1 ospowiada za id w lists. Takie zostanie wyświetlone na stronie
 
   return (
     <div className={styles.list}>
       <header className={styles.header}>
-        <h2 className={styles.title}>Things to do<span>soon!</span></h2>
+        <h2 className={styles.title}>{listData.title}</h2>
       </header>
-      <p className={styles.description}>Interesting things I want to check out</p>
+      <p className={styles.description}>{listData.description}</p>
       <section className={styles.columns}>
         {columns.map(column =>
           <Column
@@ -27,7 +31,7 @@ const List = () => {
             {...column} />
         )}
       </section>
-      <ColumnForm />
+      <ColumnForm listId={ listId } />
     </div>
   );
 };
