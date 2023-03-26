@@ -5,7 +5,7 @@ import TextInput from '../TextInput/TextInput';
 import { useDispatch } from 'react-redux';
 import { addList } from '../../redux/store';
 
-const ListForm = ({ listId }) => {
+const ListForm = () => {
 
   const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const ListForm = ({ listId }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addList({ title, description, listId }));
+    dispatch(addList({ title, description }));
     setTitle('');
     setDescription('');
   }
@@ -25,7 +25,7 @@ const ListForm = ({ listId }) => {
         <span>Title:</span><TextInput type="text" value={title} onChange={e => setTitle(e.target.value)} />
       </div>
       <div>
-        <span>Descryption:</span><TextInput type="text" value={description} onChange={e => setDescription(e.target.value)} />
+        <span>Description:</span><TextInput type="text" value={description} onChange={e => setDescription(e.target.value)} />
       </div>
       <Button>Add list</Button>
     </form>
