@@ -1,4 +1,5 @@
 import styles from './NavBar.module.scss';
+import { Link, NavLink } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -6,12 +7,13 @@ const NavBar = () => {
     <nav>
       <div className={styles.container}>
         <ul className={styles.icon}>
-          <li><a href="/" className="fa fa-tasks"></a></li>
+          <li><Link to="/" className="fa fa-tasks"></Link></li>
         </ul>
         <ul className={styles.naviLinks}>
-          <li><a href="/">Home</a></li>
-          <li><a href="/favorite">Favourites</a></li>
-          <li><a href="/about">About</a></li>
+          {/*  jeśli adres strony będzie równy właśnie wartości z parametru to (czyli tutaj /), to nasz link dostanie klasę linkActive */}
+          <li><NavLink className={({ isActive }) => isActive ? styles.linkActive : undefined} to="/">Home</NavLink></li>
+          <li><NavLink className={({ isActive }) => isActive ? styles.linkActive : undefined} to="/favorite">Favourites</NavLink></li>
+          <li><NavLink className={({ isActive }) => isActive ? styles.linkActive : undefined} to="/about">About</NavLink></li>
         </ul>
       </div>
     </nav>

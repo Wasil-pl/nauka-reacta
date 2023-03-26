@@ -28,5 +28,10 @@ nav {
       color: $color-light;
       padding: 10px;
     }
+
+    .linkActive {
+      color: $color-warning;
+    }
   }
+
 }
