@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSearchInput } from '../../redux/store';
 import Button from '../Button/Button';
@@ -28,6 +28,11 @@ const SearchForm = () => {
     dispatch(updateSearchInput( searchInput ))
     setSearchInput('');
   }
+
+  // dodajemy useEffect po to by przy odświerzeniu strony lista wyszukiwania sie zerowała i na nowo pokazała wszystkie elementy
+  useEffect(() => { // useEffect wykonuje się po odswierzeniu strony
+    dispatch(updateSearchInput('')); // wywołuje akcję updateSearchInput i czyszczę input
+  }, [dispatch]); // ten parametr mówi kiedy ma sie wykonać
 
   return (
     <form className={styles.searchForm} onSubmit={handleSubmit}>
