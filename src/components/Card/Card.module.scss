@@ -11,3 +11,14 @@
     justify-content: space-between;
     font-weight: bold;
 }
+
+.button {
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    font-size: 16px
+}
+
+.isActive {
+    color: $color-favorite;
+}
