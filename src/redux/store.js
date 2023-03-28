@@ -1,7 +1,10 @@
-import { createStore   } from 'redux';   // za stworzenie magazynu odpowiada funkcja 'crateStore
-import shortid from 'shortid';
+import { createStore, combineReducers    } from 'redux';   // za stworzenie magazynu odpowiada funkcja 'crateStore
 import { strContains } from '../utils/strContains';
+import cardsReducer from './cardsRedux';
+import columnsReducer from './columnsRedux';
 import initialState from './initialState';
+import listsReducer from './listRedux';
+import searchStringReducer from './searchStringRedux';
 
 //selectors
 /*  Funkcje, które mają pomagać nam w przygotowywaniu danych z centrali, będziemy nazywać selektorami
@@ -13,32 +16,20 @@ export const getListById = ({ lists }, listId) => lists.find(list => list.id ===
 export const getAllLists = ( state ) => state.lists;
 export const getFavoriteCards = ({ cards }) => cards.filter(cards => cards.isFavorite === true);
 
-// action creators
+export const addCard = payload => ({ type: 'ADD_CARD', payload });
+export const toggleCardFavorite = payload => ({ type: 'TOGGLE_CARD_FAVORITE', payload });
 export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
 export const addList = payload => ({ type: 'ADD_LIST', payload });
-export const addCard = payload => ({ type: 'ADD_CARD', payload });
 export const updateSearchInput = payload => ({ type: 'UPDATE_SEARCHINPUT', payload });
-export const toggleCardFavorite = payload => ({ type: 'TOGGLE_CARD_FAVORITE', payload });
 
-const reducer = (state, action) => {
-  switch(action.type) {
-    case 'ADD_COLUMN':
-      return { ...state, columns: [...state.columns, { ...action.payload, id: shortid() }]};
-    case 'ADD_CARD':
-      return { ...state, cards: [...state.cards, { ...action.payload, id: shortid() }]};
-    case 'ADD_LIST':
-      return { ...state, lists: [...state.lists, { ...action.payload, id: shortid() }]};
-    case 'UPDATE_SEARCHINPUT':
-      return { ...state, searchInput: action.payload };
-    case 'TOGGLE_CARD_FAVORITE':
-      return { ...state, cards: state.cards.map(card => (card.id === action.payload) ? { ...card, isFavorite: !card.isFavorite } : card) };
-    /* 'TOGGLE_CARD_FAVORITE': Jako nowy stan, chcemy zwrócić stary stan, ale ze zmienionymi kartami. Zmienionymi w taki sposób,
-     że jeśli jakaś karta będzie pasować id do action.payload, to podmienimy ją na obiekt o takiej samej zawartości (...card),
-      ale ze zmienioną wartością isFavorite. Inne karty są zwracane bez zmian. */
-    default:
-      return state;
-  }
-};
+const subreducers = {
+  lists: listsReducer,
+  columns: columnsReducer,
+  cards: cardsReducer,
+  searchInput: searchStringReducer,
+}
+
+const reducer = combineReducers(subreducers);
 
 const store = createStore  (
   reducer,
