@@ -22,10 +22,10 @@ const Card = ({ title, id, isFavorite }) => {
     <li className={styles.card}>{title}
       <ul>
         <button className={clsx(styles.button, isFavorite && styles.isActive)} onClick={handleFavorite}>
-          <i className={"fa fa-star-o"}/>
+          <i className="fa fa-star-o"/>
         </button>
         <button className={styles.button} onClick={deleteCard}>
-          <i className={"fa fa-trash"}/>
+          <i className="fa fa-trash"/>
         </button>
       </ul>
     </li>
