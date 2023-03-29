@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getFavoriteCards } from '../../redux/store';
+import { getFavoriteCards } from '../../redux/searchStringRedux';
 import Card from '../Card/Card';
 import CardContainer from '../CardContainer/CardContainer';
 import ColumnContainer from '../ColumnContainer/ColumnContainer';
