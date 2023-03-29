@@ -2,9 +2,9 @@ import styles from './Column.module.scss';
 import Card from '../Card/Card';
 import CardForm from '../CardForm/CardForm';
 import { useSelector } from 'react-redux';
-import ColumnContainer from '../ColumnContainer/ColumnContainer';
-import CardContainer from '../CardContainer/CardContainer';
 import { getFilteredCards } from '../../redux/columnsRedux';
+import CardWrapper from '../CardWrapper/CardWrapper';
+import ColumnWrapper from '../ColumnWrapper/ColumnWrapper';
 
 
 const Column = ({ id, icon, title }) => {
@@ -12,9 +12,9 @@ const Column = ({ id, icon, title }) => {
   const cards = useSelector(state => getFilteredCards(state, id));
 
   return (
-    <ColumnContainer>
+    <ColumnWrapper>
       <h2 className={styles.title}><span className={styles.icon + ' fa fa-' + icon} />{title}</h2>
-      <CardContainer>
+      <CardWrapper>
         {cards.map(card => 
         <Card
           key={card.id}
@@ -22,9 +22,9 @@ const Column = ({ id, icon, title }) => {
           id={card.id}
           isFavorite={card.isFavorite}
           />)}
-      </CardContainer>
+      </CardWrapper>
       <CardForm columnId={id} />
-    </ColumnContainer>
+    </ColumnWrapper>
   );
 };
 export default Column;

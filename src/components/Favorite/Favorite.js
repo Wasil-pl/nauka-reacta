@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { getFavoriteCards } from '../../redux/searchStringRedux';
 import Card from '../Card/Card';
-import CardContainer from '../CardContainer/CardContainer';
-import ColumnContainer from '../ColumnContainer/ColumnContainer';
+import CardWrapper from '../CardWrapper/CardWrapper';
+import ColumnWrapper from '../ColumnWrapper/ColumnWrapper';
 import PageTitle from '../PageTitle/PageTitle';
 import styles from './Favorite.module.scss';
 
@@ -14,8 +14,8 @@ const Favorite = () => {
     <div className={styles.Favorite}>
       <PageTitle>Favorite</PageTitle>
       <div className={styles.wrapper}>
-        <ColumnContainer>
-          <CardContainer>
+        <ColumnWrapper>
+          <CardWrapper>
             {favoriteCards.map(favoriteCard =>
             <Card
               key={favoriteCard.id}
@@ -23,8 +23,8 @@ const Favorite = () => {
               id={favoriteCard.id}
               isFavorite={favoriteCard.isFavorite}
               />)}
-          </CardContainer>
-        </ColumnContainer>
+          </CardWrapper>
+        </ColumnWrapper>
       </div>
     </div>
   );
